@@ -1,3 +1,7 @@
+# Video Link Of The Implementation and running the Code 
+
+https://drive.google.com/file/d/1xd3gZTbTPhlkUy46mvCCCYnj1edkgj9E/view?usp=drive_link
+
 # Shipment Delay Prediction Project
 
 This project is made to predict if a shipment will be delayed or delivered on time. I trained a machine learning model and created an API to check predictions.
