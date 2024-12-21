@@ -36,12 +36,41 @@ This project is made to predict if a shipment will be delayed or delivered on ti
     - After writing the Flask code, we ran it locally using Spyder.
       -The API was hosted on http://127.0.0.1:5000/
 
-4.  **How i tested the API**: - Open Postman. - Create a POST request to http://127.0.0.1:5000/predict. - Send the shipment features in the body as JSON. Example:
+4. **Creating API Endpoint**
+    - I created a /predict endpoint that takes a JSON request with shipment details and returns whether the shipment is delayed or on time.
+      The features are sent in the correct order as a list, and the model predicts the output.
+
+      **THE CODE FOR THIS**
+            from flask import Flask, request, jsonify
+import numpy as np
+import pickle
+
+app = Flask(__name__)
+
+# Load the model
+with open('finalized_model.sav', 'rb') as model_file:
+    model = pickle.load(model_file)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    features = np.array(data['features']).reshape(1, -1)
+    prediction = model.predict(features)
+    return jsonify({'prediction': 'Delayed' if prediction[0] == 1 else 'On Time'}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+6.  **How i tested the API**: - Open Postman. - Create a POST request to http://127.0.0.1:5000/predict. - Send the shipment features in the body as JSON. Example:
 
         {
         "features": [400, 15, 6, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
 
     }
+
+
+    All the features in 0 and 1 are one hot encoded that is why there are a lot of features
+    The total features are 30
 
 # The API predicted the shipment if it will be delayed or not
 
