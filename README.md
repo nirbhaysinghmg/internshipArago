@@ -2,7 +2,7 @@
 
 This project is made to predict if a shipment will be delayed or delivered on time. I trained a machine learning model and created an API to check predictions.
 
-## How We Trained the Model
+## How I Trained the Model
 
 1.  **Data Preparation**:
 
